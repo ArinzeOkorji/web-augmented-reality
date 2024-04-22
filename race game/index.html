@@ -1,0 +1,174 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-physics-system@v4.2.2/dist/aframe-physics-system.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/super-hands@3.0.4/dist/super-hands.min.js"></script>
+    <script src="components/vehicle.js"></script>
+    <title>Document</title>
+</head>
+<body>
+
+    <style>
+        .d-none {
+            display: none;
+        }
+    </style>
+
+
+    <a-scene physics camera="active: false"  obb-collider>
+    <a-assets>
+        <img id="road" src="./textures/road.jpg" alt="">
+        <img id="road-NMP" src="./textures/road-NMP.jpg" alt="">
+        <img id="road-AO" src="./textures/road-AO.jpg" alt="">
+        <img id="grass" src="./textures/grass.jpg" alt="">
+        <img id="grass-NMP" src="./textures/grass-NMP.jpg" alt="">
+        <img id="grass-AO" src="./textures/grass-AO.jpg" alt="">
+        <img id="stone_floor" src="./textures/Stone_Floor/Stone_Floor.jpg" alt="">
+        <img id="stone_floor-NMP" src="./textures/Stone_Floor/Stone_Floor_NMP.jpg" alt="">
+        <img id="stone_floor-AO" src="./textures/Stone_Floor/Stone_Floor_AO.jpg" alt="">
+
+        <a-asset-item
+            id="car"
+            src="./3d-model/car/scene.gltf"
+        ></a-asset-item>
+        <a-asset-item
+            id="viper"
+            src="./3d-model/viper-2/scene.gltf"
+        ></a-asset-item>
+    </a-assets>
+
+        <a-sky color="#87CEEB" radius="10000"></a-sky>
+
+        <!-- animation="
+                    property:position;
+            to:0 0 1000;
+            dur:200000;
+            easing: linear;
+            loop: true;
+            " -->
+
+            <a-entity position="0 0 -5"></a-entity>
+
+        <a-entity>
+            <a-plane 
+            static-body
+            material="
+                    src: #grass;
+                    repeat: 5000 5000;
+                    normal-map: #grass-NMP;
+                    normal-texture-repeat: 1 5000;
+                    ambient-occlusion-map: #grass-AO;
+                    ambient-occlusion-texture-repeat: 1 5000;
+                    "   
+                    rotation="-90 0 0"
+                    height="10000"
+                    width="10000"
+                    
+
+            >
+            <a-plane
+            visible="false"
+            static-body
+            material="src: #road;
+                        repeat: 1 5000;
+                        normal-map: #road-NMP;
+                        normal-texture-repeat: 1 1;
+                        ambient-occlusion-map: #road-AO;
+                        ambient-occlusion-texture-repeat: 1 1
+                        "
+                        height="10000"
+                        width="2"
+                        position="0 0 0.005"
+            >
+
+            <a-box
+            obb-collider
+                static-body="type: static; mass: 509; shape: auto;"
+                material="src: #stone_floor;
+                repeat: 1 1;
+                normal-map: #stone_floor-NMP;
+                normal-texture-repeat: 1 1;
+                ambient-occlusion-map: #stone_floor-AO;
+                ambient-occlusion-texture-repeat: 1 1
+                "
+                width="0.09"
+                height="10000"
+                depth="0.55"
+                position="1 0 0"
+                id="right-wall"
+                ></a-box>
+            <a-box
+            obb-collider
+            body="type: static; mass: 509; shape: auto;"
+                material="src: #stone_floor;
+                repeat: 1 1;
+                normal-map: #stone_floor-NMP;
+                normal-texture-repeat: 1 1;
+                ambient-occlusion-map: #stone_floor-AO;
+                ambient-occlusion-texture-repeat: 1 1
+                "
+                width="0.09"
+                height="10000"
+                depth="0.55"
+                id="left-wall"
+                position="-1 0 0"
+                ></a-box>
+        </a-plane>
+
+         <a-torus-knot position="0 6 3.693" color="#B84A39" height="1" segments-radial="2" segments-tubular="900" arc="180" p="1.5" q="1.2" radius="1.8" radius-tubular="1.9" material="color: #385eb7; flatShading: true; side: double; width: 1" geometry="segmentsRadial: 3; segmentsTubular: 300; p: 1; q: 1; radius: 6.32; radiusTubular: 0.32" rotation="-26.264 0 0"></a-torus-knot>
+        </a-plane>
+        </a-entity>
+
+        
+
+
+    <a-entity camera id="camera" position="0 2 0">
+        <!-- <a-entity
+        body="type: static; mass: 0; shape: none;"
+          shape__main="shape: cylinder;
+                       height: 0.36;
+                       radiusTop: 0.24;
+                       radiusBottom: 0.24;"
+        gltf-model="#car"
+        position="0.43387 -1.800 -2.852"
+        rotation="0 179.9998479605043 0"
+        scale="0.2535 0.2535 0.2535">
+    </a-entity> -->
+
+    <a-entity
+        vehicle
+        obb-collider
+        constraint="target: #left-wall; type: lock"
+        body="type: dynamic; mass: 50; shape: auto;"
+          shape__main="shape: box;
+                       height: 0.36;
+                       radiusTop: 0.24;
+                       radiusBottom: 0.24;"
+        gltf-model="#viper"
+        position="-0.46135 -1.828 -2.933"
+        rotation="0 89.6707597269495 0"
+        scale="0.51135 0.51135 0.51135">
+    </a-entity>
+    </a-entity>
+
+    <!-- <a-entity
+        vehicle
+        dynamic-body="mass: 500; linearDamping: 0.05; angularDamping: 0.3; shape: sphere; 
+sphereRadius: 0.125;"
+        grabbable
+          shape__main="shape: box;
+                       height: 0.36;
+                       radiusTop: 0.24;
+                       radiusBottom: 0.24;"
+        gltf-model="#viper"
+        position="-0.46135 -1.828 -4.933"
+        rotation="0 89.6707597269495 0"
+        scale="0.51135 0.51135 0.51135">
+    </a-entity> -->
+
+    </a-scene>
+    
+</body>
+</html>

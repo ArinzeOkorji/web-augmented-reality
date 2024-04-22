@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Curved Road in A-Frame</title>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/bezier-js@6.1.4/src/bezier.min.js"></script>
+    <script src="https://unpkg.com/aframe-curve-component/dist/aframe-curve-component.min.js"></script> 
+    <script src="https://rawgit.com/protyze/aframe-alongpath-component/master/dist/aframe-alongpath-component.min.js"></script>
+  </head>
+  <body>
+    <a-scene camera="active: false">
+      <!-- Camera and Controls -->
+      <a-entity camera="active: true" position="0 2 -1" rotation="90 90 90" look-controls wasd-controls></a-entity>
+
+      <a-assets>
+        <img id="road" src="./textures/road.jpg" alt="">
+        <img id="road-NMP" src="./textures/road-NMP.jpg" alt="">
+        <img id="road-AO" src="./textures/road-AO.jpg" alt="">
+        <img id="grass" src="./textures/grass.jpg" alt="">
+        <img id="grass-NMP" src="./textures/grass-NMP.jpg" alt="">
+        <img id="grass-AO" src="./textures/grass-AO.jpg" alt="">
+        <img id="stone_floor" src="./textures/Stone_Floor/Stone_Floor.jpg" alt="">
+        <img id="stone_floor-NMP" src="./textures/Stone_Floor/Stone_Floor_NMP.jpg" alt="">
+        <img id="stone_floor-AO" src="./textures/Stone_Floor/Stone_Floor_AO.jpg" alt="">
+
+        <a-asset-item
+            id="car"
+            src="./3d-model/car/scene.gltf"
+        ></a-asset-item>
+        <a-asset-item
+            id="viper"
+            src="./3d-model/viper-2/scene.gltf"
+        ></a-asset-item>
+    </a-assets>
+
+      <!-- Curved Road -->
+      <!-- <a-entity id="curvedRoad"></a-entity> -->
+
+      <a-curve id="track1" type="CubicBezier" closed="true">
+        <a-curve-point position="0 1 -3"></a-curve-point>
+        <a-curve-point position="0 1 -8"></a-curve-point>
+        <a-curve-point position="-1 1 -10"></a-curve-point>
+        <a-curve-point position="0 1 -12"></a-curve-point>
+        <a-curve-point position="-2 1 -12.5"></a-curve-point>
+        <a-curve-point position="-4 1 -12"></a-curve-point>
+        <a-curve-point position="-4.5 1 -11.5"></a-curve-point>
+        <a-curve-point position="-4.5 1 -11"></a-curve-point>
+        <a-curve-point position="-4.25 1 -10.5"></a-curve-point>
+        <a-curve-point position="-4 1 -10"></a-curve-point>
+        <a-curve-point position="-2 1 -7.5"></a-curve-point>
+        <a-curve-point position="-2 1 -5"></a-curve-point>
+        <a-curve-point position="-2 1 -5"></a-curve-point>
+        <a-curve-point position="-2.05 1 -4.65"></a-curve-point>
+        <a-curve-point position="-2.15 1 -4.3"></a-curve-point>
+        <a-curve-point position="-2.35 1 -4"></a-curve-point>
+        <a-curve-point position="-3 1 -3.8"></a-curve-point>
+        <a-curve-point position="-3.5 1 -4.5"></a-curve-point>
+        <a-curve-point position="-3.75 1 -4.75"></a-curve-point>
+        <a-curve-point position="-5.5 1 -8"></a-curve-point>
+        <a-curve-point position="-6 1 -8.5"></a-curve-point>
+        <a-curve-point position="-8 1 -10.5"></a-curve-point>
+        <a-curve-point position="-9.5 1 -9"></a-curve-point>
+        <a-curve-point position="-11 1 -8"></a-curve-point>
+        <a-curve-point position="-11.5 1 -8"></a-curve-point>
+        <a-curve-point position="-16 1 -10.5"></a-curve-point>
+        <a-curve-point position="-15.5 1 -11.5"></a-curve-point>
+        <a-curve-point position="-17 1 -13"></a-curve-point>
+        <a-curve-point position="-19 1 -12.5"></a-curve-point>
+        <a-curve-point position="-20.5 1 -10"></a-curve-point>
+        <a-curve-point position="-19 1 -8"></a-curve-point>
+        <a-curve-point position="-14 1 -6"></a-curve-point>
+        <a-curve-point position="-12 1 -6"></a-curve-point>
+        <a-curve-point position="-11 1 -6.5"></a-curve-point>
+        <a-curve-point position="-7 1 -5.5"></a-curve-point>
+        <!-- <a-curve-point position="-2 1 -2.5"></a-curve-point> -->
+        <a-curve-point position="-0.5 1 -1.5"></a-curve-point>
+        <a-curve-point position="-0 1 -3"></a-curve-point>
+    </a-curve>
+
+      <a-curve id="right-wall-track" type="CubicBezier" closed="true">
+        <a-curve-point position="0 1 -3" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="0 1 -8" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-1 1 -10.01" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-0.45 1 -11" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-0.1 1 -11.5" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="0 1 -12" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-0.45 1 -12.5" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-2 1 -12.78" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-2.5 1 -12.78" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-3 1 -12.73" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-3.5 1 -12.6" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-4 1 -12.45" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-4.5 1 -12.23" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-4.93 1 -11.85" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-5.07 1 -11.6" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-5.14 1 -11.3" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-4.65 1 -10" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-4.3 1 -9.5" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-3.8 1 -9" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-3.35 1 -8.5" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-2.99 1 -8.1" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-2.77 1 -7.8" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-2.63 1 -7.55" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-2.53 1 -7.25" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-2.47 1 -6.85" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-2.46 1 -6.55" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-2.475 1 -6.25" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-2.51 1 -5.8" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-2.57 1 -5.2" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-2.62 1 -4.8" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-2.71 1 -4.4" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-2.82 1 -4.23" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-3.2 1 -4.08" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-3.45 1 -4.5" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-3.51 1 -4.6" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-3.7 1 -4.82" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-3.8 1 -4.9" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-5.45 1 -8" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-5.87 1 -8.5" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-6.2 1 -8.8" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-6.66 1 -9.4" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-6.97 1 -9.8" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-7.42 1 -10.3" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-7.87 1 -10.65" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-8.3 1 -10.78" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-8.6 1 -10.72" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-8.75 1 -10.65" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-8.95 1 -10.5" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <!-- <a-curve-point position="-9.5 1 -9" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point> -->
+        <a-curve-point position="-9.9 1 -9.3" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-11 1 -8.45" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-11.4 1 -8.25" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-11.6 1 -8.23" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-11.9 1 -8.33" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-12.6 1 -8.6" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-13.5 1 -9" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-14.7 1 -9.6" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-15.5 1 -10.1" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-15.9 1 -10.42" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-16.01 1 -10.57" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-15.95 1 -10.7" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-15.7 1 -11" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-15.53 1 -11.3" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-15.51 1 -11.4" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-15.51 1 -11.5" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-15.53 1 -11.6" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-15.6 1 -11.8" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-15.79 1 -12.1" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-16.1 1 -12.5" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-16.7 1 -13" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-16.9 1 -13.13" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-17.1 1 -13.23" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-17.27 1 -13.28" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-17.65 1 -13.34" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-18 1 -13.34" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-19 1 -13.02" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-19.4 1 -12.8" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-19.63 1 -12.6" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-19.95 1 -12.3" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-20.2 1 -12" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-20.43 1 -11.7" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-20.68 1 -11.3" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-20.82 1 -11" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-20.94 1 -10.7" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-21.03 1 -10.4" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-21.07 1 -10.2" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-21.08 1 -10" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-21.06 1 -9.8" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-21.01 1 -9.6" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-20.97 1 -9.5" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-20.93 1 -9.4" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-20.7 1 -9.0" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-20.35 1 -8.6" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-19.95 1 -8.2" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-19.47 1 -7.8" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-18.87 1 -7.4" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-18.47 1 -7.17" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-18 1 -6.93" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-17.47 1 -6.71" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-16.87 1 -6.47" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-16.27 1 -6.25" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-15.67 1 -6.05" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-15.07 1 -5.89" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-14.47 1 -5.74" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-13.87 1 -5.64" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-13.27 1 -5.61" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-12.67 1 -5.64" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-12.37 1 -5.67" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-12.07 1 -5.75" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-11.77 1 -5.93" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-11.47 1 -6.15" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-11.17 1 -6.22" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-10.87 1 -6.22" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-10.27 1 -6.13" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-9.67 1 -6" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-9.07 1 -5.83" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-8.47 1 -5.64" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-7.87 1 -5.43" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-7.27 1 -5.18" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-6.67 1 -4.85" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-6.07 1 -4.47" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-5.47 1 -4.04" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-4.87 1 -3.6" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-4.27 1 -3.15" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-3.67 1 -2.72" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-3.07 1 -2.28" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-2.47 1 -1.86" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <!-- <a-curve-point position="-17 1 -12.5" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-19 1 -12.5" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-20.5 1 -10" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-19 1 -8" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-14 1 -6" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-12 1 -6" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-11 1 -6.5" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-7 1 -5.5" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point> -->
+        <a-curve-point position="-1.87 1 -1.5" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-1.57 1 -1.35" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-1.27 1 -1.23" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-0.97 1 -1.18" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-0.67 1 -1.22" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-0.35 1 -1.5" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-0.2 1 -1.9" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <a-curve-point position="-0.1 1 -2.5" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+        <!-- <a-curve-point position="-0.5 1 -1.5" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point> -->
+        <a-curve-point position="-0 1 -3" geometry="primitive: box; height: 0.1; width: 0.1; depth: 0.1" material="color: red"></a-curve-point>
+    </a-curve>
+
+    <!-- Draw the Curve -->
+    <a-draw-curve curveref="#track1" material="shader: line; color: blue;"></a-draw-curve>
+    
+    <!-- Clone a Box along the Curve -->
+    <a-entity clone-along-curve="curve: #track1; spacing: 0.2; scale: 1 1 1; rotation: 0 0 0;" geometry="primitive:box; height:0.1; width:0.2; depth:0.1"></a-entity>
+
+    <a-sky color="#87CEEB" radius="10000"></a-sky>
+
+    <a-entity>
+        <a-plane 
+        static-body
+        material="
+                src: #grass;
+                repeat: 5000 5000;
+                normal-map: #grass-NMP;
+                normal-texture-repeat: 1 5000;
+                ambient-occlusion-map: #grass-AO;
+                ambient-occlusion-texture-repeat: 1 5000;
+                "   
+                rotation="-90 0 0"
+                height="10000"
+                width="10000"
+                
+
+        >
+
+     </a-plane>
+
+     
+     <a-plane
+     clone-along-curve="curve: #track1; spacing: 0.01; scale: 1 1 1; rotation: -90 0 0;"
+     static-body
+     material="src: #road;
+                 repeat: 1 1;
+                 normal-map: #road-NMP;
+                 normal-texture-repeat: 1 1;
+                 ambient-occlusion-map: #road-AO;
+                 ambient-occlusion-texture-repeat: 1 1
+                 "
+                 height="0.1"
+                 width="0.5"
+                 position="0 0 0.005"
+     >
+
+ </a-plane>
+
+ 
+ <a-box
+ obb-collider
+ clone-along-curve="curve: #right-wall-track; spacing: 0.01; scale: 1 1 1; rotation: -90 0 0;"
+ material="src: #stone_floor;
+ repeat: 1 1;
+ normal-map: #stone_floor-NMP;
+ normal-texture-repeat: 1 1;
+ ambient-occlusion-map: #stone_floor-AO;
+ ambient-occlusion-texture-repeat: 1 1
+ "
+     width="0.09"
+     height="0.1"
+     depth="0.05"
+     position="0.3 0 0"
+     id="right-wall"
+     ></a-box>
+ <a-box
+ visible="false"
+ obb-collider
+ clone-along-curve="curve: #track1; spacing: 0.01; scale: 1 1 1; rotation: -90 0 0;"
+ body="type: static; mass: 509; shape: auto;"
+     material="src: #stone_floor;
+     repeat: 1 1;
+     normal-map: #stone_floor-NMP;
+     normal-texture-repeat: 1 1;
+     ambient-occlusion-map: #stone_floor-AO;
+     ambient-occlusion-texture-repeat: 1 1
+     "
+     width="0.09"
+     height="0.1"
+     depth="0.05"
+     id="left-wall"
+     position="-0.6 0 0"
+     ></a-box>
+
+
+     <a-entity
+        vehicle
+        obb-collider
+        constraint="target: #left-wall; type: lock"
+        body="type: dynamic; mass: 50; shape: auto;"
+          shape__main="shape: box;
+                       height: 0.36;
+                       radiusTop: 0.24;
+                       radiusBottom: 0.24;"
+        gltf-model="#viper"
+        position="-0.46135 -1.828 -2.933"
+        rotation="0 89.6707597269495 0"
+        scale="0.51135 0.51135 0.51135">
+    </a-entity>
+    </a-entity>
+    </a-scene>
+
+  </body>
+</html>
